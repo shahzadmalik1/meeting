@@ -1,49 +1,44 @@
-@extends('layouts.app')
-
+@extends('app-layout.layout')
+ 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Meetings</div>
-
-                <div class="card-body">
-                    <div class="form-group">
-                        <a href="{{url('meetings/add-view')}}" class="btn btn-sm btn-primary my-2">Add Meetings</a>
-                    </div>
-                    <table class="table table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col">Handle</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                          </tr>
-                        </tbody>
-                      </table>
+    <div class="jumbotron my-2">
+       
+        @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
                 </div>
-            </div>
-        </div>
+            @endif
+        <a href="{{url('meetings/create')}}" class="btn btn-primary my-2"> Add Meeting</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Email</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($meetings as $data)
+                <tr>
+                    <td>{{$data->email}}</td>
+                    <td>{{$data->subject}}</td>
+                    <td>{{$data->start_date}}</td>
+                    <td>{{$data->end_date}}</td>
+                    <td>{{$data->start_time}}</td>
+                    <td>{{$data->end_time}}</td>
+                    <td>
+                        <a class="badge badge-info mr-1" href="{{ url('meetings/show',$data->id) }}">Show</a>
+                        <a class="badge badge-warning mr-1" href="{{ url('meetings/edit',$data->id) }}">Edit</a>
+                        <a class="badge badge-danger" href="{{ url('meetings/delete',$data->id) }}">Delete</a>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
     </div>
 </div>
-@endsection

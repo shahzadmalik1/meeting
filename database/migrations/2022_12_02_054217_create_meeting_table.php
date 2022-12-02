@@ -15,11 +15,8 @@ return new class extends Migration
     {
         Schema::create('meeting', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->string('email');
             $table->string('subject');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
             $table->date('start_date');
             $table->date('end_date');
             $table->time('start_time');

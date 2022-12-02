@@ -1,34 +1,53 @@
-@extends('layouts.app')
-
+@extends('app-layout.layout')
+ 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Meetings</div>
 
-                <div class="card-body">
-                    <div class="form-group">
-                        <a href="{{url('add-view')}}" class="btn btn-sm btn-primary my-2">Add Meetings</a>
-                    </div>
-                    <form action="{{url('meetings/add')}}" method="POST">
-                        <div class="form-group py-1">
-                            <label for="">Subject</label>
-                            <input type="text" class="form-control form-control-sm">
-                        </div>
-                        
-                        <div class="form-group py-1">
-                            <label for="">Email</label>
-                            <input type="email" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group py-1">
-                            <label for="">Start Date</label>
-                            <input type="datetime" class="form-control form-control-sm">
-                        </div>
-                    </form>
+    <div class="container mt-4">
+        <div class="jumbotron my-2 px-5">
+            <a href="{{url('meetings')}}" class="btn btn-info my-3">Meetings List</a>
+          
+            @if(session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
                 </div>
+            @endif
+            <form action="{{ url('meetings/store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label>Subject:</label>
+                    <input type="text" name="subject" class="form-control">
+                </div>
+            
+                <div class="form-group">
+                    <label>Email:</label>
+                    <input type="text" class="form-control" name="email">
+                </div>
+                <div class="form-group">
+                    <label>Address:</label>
+                    <input type="text" name="address" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Start date:</label>
+                    <input type="date" class="form-control" name="start_date">
+                </div>
+                <div class="form-group">
+                    <label>End Date:</label>
+                    <input type="date" class="form-control" name="end_date">
+                </div>
+                <div class="form-group">
+                    <label>Start Time:</label>
+                    <input type="time" class="form-control" name="start_time">
+                </div>
+                <div class="form-group">
+                    <label>End Time:</label>
+                    <input type="time" class="form-control" name="end_time">
+                </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
-        </div>
+               
+        </form>
     </div>
 </div>
-@endsection
+    
