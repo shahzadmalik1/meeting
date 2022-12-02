@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Attendies;
 use App\Models\Meeting;
 use Illuminate\Http\Request;
 
@@ -67,6 +68,15 @@ class MeetingController extends Controller
     {
         Meeting::where('id',$id)->delete();
         return redirect()->back()->with('success', 'Data Deleted successfully!');
+    }
 
+    public function addAttendie(Request $request, $id)
+    {
+        $data = $request->all();
+        Attendies::create([
+            'email' => $data['attendie_email'],
+            'meeting_id' => $id,
+        ]);
+        return redirect()->back()->with('success', 'Data created successfully!');
     }
 }
