@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Attendies;
 use App\Models\Meeting;
 use Illuminate\Http\Request;
+use Spatie\GoogleCalendar\Event;
 
 class MeetingController extends Controller
 {
     public function index()
     {
+        // $events = Event::get();      //Calender get
         $meetings = Meeting::get();
         return view('meeting', compact('meetings'));
     }

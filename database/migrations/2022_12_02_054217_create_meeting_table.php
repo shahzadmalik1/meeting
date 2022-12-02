@@ -17,6 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('email');
             $table->string('subject');
+            $table->string('address');
             $table->date('start_date');
             $table->date('end_date');
             $table->time('start_time');

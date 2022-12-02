@@ -14,7 +14,7 @@
                     @csrf
                 <div class="form-group">
                     <label for="">Add Attendie</label>
-                    <input type="email" class="form-control" name="attendie_email">
+                    <input type="email" class="form-control" name="attendie_email" required>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Add" class="btn btn-sm btn-success">
