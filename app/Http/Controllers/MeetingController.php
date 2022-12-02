@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Attendies;
 use App\Models\Meeting;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Spatie\GoogleCalendar\Event;
 
@@ -23,6 +24,9 @@ class MeetingController extends Controller
 
     public function store(Request $request)
     {
+        //create a new event
+       
+
             $data = $request->all();
             Meeting::create([
                 'email'     => $data['email'],
@@ -33,6 +37,16 @@ class MeetingController extends Controller
                 'start_time' => $data['start_time'],
                 'end_time'  => $data['end_time']
             ]);
+
+            $event = new Event;
+            $event->name = 'A new event';
+            $event->description =  $data['subject'];
+            $event->startDateTime = Carbon::now();
+            $event->endDateTime = Carbon::now()->addHour();
+
+            $event->addAttendee(['email' => 'shahzad.malik1001@gmail.com']);
+    
+            $event->save();
             return redirect()->back()->with('success', 'Data created successfully!');
 
     }

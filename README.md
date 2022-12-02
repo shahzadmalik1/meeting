@@ -17,3 +17,5 @@ Some actions are available i.e,
     - Edit meetings
     - Delete meetings
     - Add Attendies
+
+All changes are available in Master branch
